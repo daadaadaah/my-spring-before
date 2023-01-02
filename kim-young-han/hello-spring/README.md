@@ -91,3 +91,15 @@ cf. IntelliJ 단축기
 
 
 # 4. 스프링 빈과 의존관계
+## 스프링 빈을 등록하는 2가지 방법
+### 방법 1. 컴포넌트 스캔과 자동 의존관계 설정 : @Service, @Repository, @Controller 등을 추가해주는 방법
+<컴포넌트 스캔 원리>
+- @Component 뿐만 아니라 @Component를 포함하는 어노테이션(예 : @Controller, @Service, @Repository 등)이 있으면, 스프링 빈으로 자동 등록된다.
+- @Controller 컨트롤러가 스프링 빈으로 자동 등록되는 이유도 컴포넌트 스캔 때문이다.
+
+
+
+### 방법 2. 자바 코드로 직접 스프링 빈 등록하기
+
+
+### @Autowired
