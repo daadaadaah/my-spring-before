@@ -109,3 +109,13 @@ cf. @Autowired를 통한 DI는 helloController, memberService 등과 같이 스�
 
 
 # 5. 웹 MVC 개발
+
+# 6. 스프링 DB 접근 기술
+## 1. JDBC + 스프링 통합 테스트
+
+## 2. JDBC Template
+
+## 3. JPA
+- GenerationType.IDENTITY : DB에서 자동으로 생성해준다는 의미
+
+## 4. 스프링 데이터 JPA
