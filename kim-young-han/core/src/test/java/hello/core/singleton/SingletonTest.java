@@ -22,4 +22,14 @@ public class SingletonTest {
         // 참조값이 다른 것을 확인
         assertThat(memberService1).isNotSameAs(memberService2);
     }
+
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+    void singletonServiceTest() {
+        SingletonService singletonService1 = SingletonService.getInstance();
+        SingletonService singletonService2 = SingletonService.getInstance();
+
+        // isEqualTo(: 객체가 같은 값을 가지고 있는지 비교한다.) vs isSameAs(: 메모리상 같은 객체를 가리키는지 비교 (주소 비교))
+        assertThat(singletonService1).isSameAs(singletonService2);
+    }
 }
