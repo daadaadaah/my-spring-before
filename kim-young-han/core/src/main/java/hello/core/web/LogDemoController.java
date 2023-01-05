@@ -14,14 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class LogDemoController {
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger; // 가짜 myLogger 임
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString();
-        MyLogger myLogger = myLoggerProvider.getObject(); // 이때 생성됨
-        myLogger.setRequestURL(requestURL);
+        myLogger.setRequestURL(requestURL); // 이때, 진짜 myLogger를 찾아서 동작함
+
+        System.out.println("myLogger = " + myLogger.getClass()); // class hello.core.common.MyLogger$$EnhancerBySpringCGLIB$$20b23070 -> 가짜 myLogger
 
         myLogger.log("controller test");
         logDemoService.logic("testId");
