@@ -1,6 +1,7 @@
 package hello.core.scope;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -29,7 +30,7 @@ public class SingletonWithPrototypeTest {
     static class ClientBean {
 
         @Autowired
-        private ObjectProvider<PrototypeBean>  prototypeBeanProvider;
+        private ObjectFactory<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
             PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
