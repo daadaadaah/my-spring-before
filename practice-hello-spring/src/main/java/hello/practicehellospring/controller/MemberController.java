@@ -1,5 +1,6 @@
 package hello.practicehellospring.controller;
 
+import hello.practicehellospring.domain.MemberForm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import hello.practicehellospring.domain.Member;
@@ -21,9 +22,9 @@ public class MemberController {
     }
 
     @PostMapping("/member")
-    public ResponseEntity<Member> create(@RequestBody String name) throws IOException {
+    public ResponseEntity<Member> create(@RequestBody MemberForm memberForm) throws IOException {
         Member member = new Member();
-        member.setName(name);
+        member.setName(memberForm.getName());
 
         memberService.join(member);
 
@@ -32,11 +33,6 @@ public class MemberController {
 
     @GetMapping("/member/{memberId}")
     public ResponseEntity<Member> getMember(@PathVariable("memberId") Long memberId) throws IOException {
-        Member member = new Member();
-        member.setName("test");
-
-        memberService.join(member);
-
         Member result = memberService.findOne(memberId).get();
 
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -44,11 +40,6 @@ public class MemberController {
 
     @PutMapping("/member/{memberId}")
     public ResponseEntity<Member> updateMember(@PathVariable("memberId") Long memberId, @RequestBody String name) throws IOException {
-        Member member = new Member();
-        member.setName("test");
-
-        memberService.join(member);
-
         Member newMember = new Member();
         newMember.setId(memberId);
         newMember.setName(name);
