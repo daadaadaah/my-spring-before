@@ -1,7 +1,6 @@
 package hello.practicehellospring.repository;
 
 import hello.practicehellospring.domain.Member;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
@@ -34,14 +33,15 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Member update(Long id, Member member) {
+    public Long update(Long id, Member member) {
         store.put(id, member);
-        return store.get(id);
+        return id;
     }
 
     @Override
-    public Member remove(Long id) {
-        return store.remove(id);
+    public Long remove(Long id) {
+        store.remove(id);
+        return id;
     }
 
     public void clearStore() {

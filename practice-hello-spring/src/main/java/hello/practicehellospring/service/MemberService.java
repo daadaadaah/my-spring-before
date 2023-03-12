@@ -51,14 +51,14 @@ public class MemberService {
     /**
      * 회원 정보 수정
      */
-    public Member updateMember(Long memberId, Member member) {
+    public Long updateMember(Long memberId, Member member) {
         return memberRepository.update(memberId, member);
     }
 
     /**
      * 회원 탈퇴
      */
-    public Member withdraw(Long memberId) {
+    public Long withdraw(Long memberId) {
         return memberRepository.remove(memberId);
     }
 }

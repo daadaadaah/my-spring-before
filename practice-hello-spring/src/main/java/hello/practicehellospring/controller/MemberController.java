@@ -39,25 +39,20 @@ public class MemberController {
     }
 
     @PutMapping("/member/{memberId}")
-    public ResponseEntity<Member> updateMember(@PathVariable("memberId") Long memberId, @RequestBody String name) throws IOException {
+    public ResponseEntity<Long> updateMember(@PathVariable("memberId") Long memberId, @RequestBody MemberForm memberForm) throws IOException {
         Member newMember = new Member();
         newMember.setId(memberId);
-        newMember.setName(name);
+        newMember.setName(memberForm.getName());
 
-        Member result = memberService.updateMember(memberId, newMember);
+        Long updatedId = memberService.updateMember(memberId, newMember);
 
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(updatedId, HttpStatus.OK);
     }
 
     @DeleteMapping("/member/{memberId}")
-    public ResponseEntity<Member> removeMember(@PathVariable("memberId") Long memberId) throws IOException {
-        Member member = new Member();
-        member.setName("test");
+    public ResponseEntity<Long> removeMember(@PathVariable("memberId") Long memberId) throws IOException {
+        Long removedId = memberService.withdraw(memberId);
 
-        memberService.join(member);
-
-        Member result = memberService.withdraw(memberId);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(removedId, HttpStatus.OK);
     }
 }
