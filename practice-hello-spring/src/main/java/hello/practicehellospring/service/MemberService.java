@@ -54,7 +54,7 @@ public class MemberService {
      * 회원 정보 수정
      */
     public void updateMember(Long memberId, Member member) {
-        memberRepository.update(memberId, member);
+        memberRepository.save(member); // 스프링 데이터 JPA의 인터페이스 맞춰주기 위해 사용
     }
 
     /**
