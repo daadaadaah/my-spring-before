@@ -2,10 +2,7 @@ package hello.practicehellospring.service;
 
 import hello.practicehellospring.domain.Member;
 import hello.practicehellospring.repository.MemberRepository;
-import hello.practicehellospring.repository.MemoryMemberRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +19,18 @@ public class MemberService {
      * 회원 가입
      * */
     public Long join(Member member) {
-        validateDuplicateMember(member); // 중복 회원 검증
+        long start = System.currentTimeMillis();
+        try {
+            validateDuplicateMember(member); // 중복 회원 검증
 
-        memberRepository.save(member);
-        return member.getId();
+            memberRepository.save(member);
+
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -40,27 +45,59 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+        long start = System.currentTimeMillis();
+
+        try {
+            return memberRepository.findAll();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
     }
 
     /**
      * 회원 조회
      */
     public Optional<Member> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
+        long start = System.currentTimeMillis();
+
+        try {
+            return memberRepository.findById(memberId);
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
     }
 
     /**
      * 회원 정보 수정
      */
     public void updateMember(Long memberId, Member member) {
-        memberRepository.save(member); // 스프링 데이터 JPA의 인터페이스 맞춰주기 위해 사용
+        long start = System.currentTimeMillis();
+
+        try {
+            memberRepository.save(member); // 스프링 데이터 JPA의 인터페이스 맞춰주기 위해 사용
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
     }
 
     /**
      * 회원 탈퇴
      */
     public void withdraw(Long memberId) {
-        memberRepository.deleteById(memberId);
+        long start = System.currentTimeMillis();
+
+        try {
+            memberRepository.deleteById(memberId);
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
     }
 }
