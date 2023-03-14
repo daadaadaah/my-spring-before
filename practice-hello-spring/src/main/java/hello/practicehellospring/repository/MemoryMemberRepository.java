@@ -33,15 +33,13 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Long update(Long id, Member member) {
+    public void update(Long id, Member member) {
         store.put(id, member);
-        return id;
     }
 
     @Override
-    public Long remove(Long id) {
+    public void deleteById(Long id) {
         store.remove(id);
-        return id;
     }
 
     public void clearStore() {

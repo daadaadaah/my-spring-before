@@ -49,15 +49,13 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Long update(Long id, Member member) {
+    public void update(Long id, Member member) {
         em.merge(member);
-        return id;
     }
 
     @Override
-    public Long remove(Long id) {
+    public void deleteById(Long id) {
         Member member = em.find(Member.class, id);
         em.remove(member);
-        return id;
     }
 }

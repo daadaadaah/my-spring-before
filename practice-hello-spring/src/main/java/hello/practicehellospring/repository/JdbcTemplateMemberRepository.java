@@ -53,13 +53,13 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Long update(Long id, Member member) {
-        return (long) jdbcTemplate.update("update member set name=? where id=?", member.getName() , id);
+    public void update(Long id, Member member) {
+        jdbcTemplate.update("update member set name=? where id=?", member.getName() , id);
     }
 
     @Override
-    public Long remove(Long id) {
-        return (long) jdbcTemplate.update("delete from member where id=?", id);
+    public void deleteById(Long id) {
+        jdbcTemplate.update("delete from member where id=?", id);
     }
 
     private RowMapper<Member> memberRowMapper() {

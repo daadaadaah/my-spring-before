@@ -130,7 +130,7 @@ public class JdbcMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Long update(Long id, Member member) {
+    public void update(Long id, Member member) {
         String sql = "update member set name = ? where id = ?";
 
         Connection conn = null;
@@ -147,8 +147,6 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt.executeUpdate(); // 이때 실제 쿼리가 날라감
 
             rs = pstmt.getGeneratedKeys(); // 방금 생성된 key 반환
-
-            return id;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {
@@ -157,7 +155,7 @@ public class JdbcMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Long remove(Long id) {
+    public void deleteById(Long id) {
         String sql = "delete member where id = ?";
 
         Connection conn = null;
@@ -171,8 +169,6 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt.setLong(1, id);
 
             pstmt.executeUpdate(); // 이때 실제 쿼리가 날라감
-
-            return id;
         } catch (Exception e) {
             throw new IllegalStateException(e);
         } finally {

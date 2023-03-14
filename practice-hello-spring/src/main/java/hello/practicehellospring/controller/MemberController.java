@@ -44,15 +44,15 @@ public class MemberController {
         newMember.setId(memberId);
         newMember.setName(memberForm.getName());
 
-        Long updatedId = memberService.updateMember(memberId, newMember);
+        memberService.updateMember(memberId, newMember);
 
-        return new ResponseEntity<>(updatedId, HttpStatus.OK);
+        return new ResponseEntity<>(memberId, HttpStatus.OK);
     }
 
     @DeleteMapping("/member/{memberId}")
     public ResponseEntity<Long> removeMember(@PathVariable("memberId") Long memberId) throws IOException {
-        Long removedId = memberService.withdraw(memberId);
+        memberService.withdraw(memberId);
 
-        return new ResponseEntity<>(removedId, HttpStatus.OK);
+        return new ResponseEntity<>(memberId, HttpStatus.OK);
     }
 }
